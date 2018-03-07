@@ -1,2 +1,2 @@
-# postcss-px2x
+# postcss-pxtotarget
 postcss plugin

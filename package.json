@@ -1,0 +1,28 @@
+{
+  "name": "postcss-pxtotarget",
+  "version": "1.0.0",
+  "description": "postcss plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yingye/postcss-pxtotarget.git"
+  },
+  "keywords": [
+    "postcss",
+    "plugin",
+    "pxtotarget"
+  ],
+  "author": "yingye",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yingye/postcss-pxtotarget/issues"
+  },
+  "homepage": "https://github.com/yingye/postcss-pxtotarget#readme",
+  "dependencies": {
+    "object-assign": "^4.1.1",
+    "postcss": "^6.0.19"
+  }
+}
