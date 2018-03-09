@@ -1,0 +1,48 @@
+/* 正常情况，含有px */
+.title {
+	font-size: 24rpx;
+	background-image: url(../slice/icon-wh.png);
+	margin: 0 0 0 5rpx;
+	vertical-align: -1rpx;
+	display: flex;
+}
+
+/* 正常情况，含有其他值 */
+.title2 {
+	padding: 20rpx 30rpx 2rem 4em;
+	background-image: url(../slice/icon-wh@2x.png);
+}
+
+/* 正常情况，不转换 */
+.title3 {
+	padding: 20rpx 30px 2rem 4em; /* no */
+	font-size: 24px; /* no */
+	background-image: url(../slice/icon-wh@2x.png);
+}
+
+/* media 的情况 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+	.word {
+		margin-top: 30rpx;
+		margin-bottom: 40rpx;
+		background-image: url(../slice/word.png);
+	}
+
+	.word-retina {
+		margin-top: 50rpx;
+		margin-bottom: 60rpx;
+		background-image: url(../slice/word@2x.png);
+	}
+}
+
+/* keyframes 的情况 */
+@keyframes anim {
+	0% {
+		font-size: 24rpx;
+		background-image: url(../slice/keyframe1@2x.png);
+	}
+	100% {
+		font-size: 42px; /*no*/
+		background-image: url(../slice/keyframe2@2x.png);
+	}
+}
