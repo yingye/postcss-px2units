@@ -2,7 +2,7 @@
 
 # postcss-px2units
 
-[![Build Status](https://travis-ci.org/yingye/postcss-wx-pxtorpx.svg?branch=master)](https://travis-ci.org/yingye/postcss-px2units)
+[![Build Status](https://travis-ci.org/yingye/postcss-px2units.svg?branch=master)](https://travis-ci.org/yingye/postcss-px2units)
 [![npm version](https://badge.fury.io/js/postcss-px2units.svg)](https://badge.fury.io/js/postcss-px2units)
 [![change-log](https://img.shields.io/badge/changelog-md-blue.svg)](https://github.com/yingye/postcss-px2units/blob/master/CHANGELOG.md)
 
