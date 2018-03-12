@@ -1,171 +1,132 @@
-var should = require('should');
-var vfs = require('vinyl-fs');
-var through2 = require('through2');
-var postcss = require('gulp-postcss');
-var noop = function () {};
-var lazyimagecss = require('../index.js');
+var postcss = require('postcss')
+var { expect } = require('chai')
 
-describe('postcss-lazyimagecss Unit est', function() {
-	it('Image `width` -> should be able to get `width` properties.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../img','../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/width/g).length.should.equal(14);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+var plugin = require('../')
 
-	it('Image `height` -> should be able to get `height` properties.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../img','../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/height/g).length.should.equal(12);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+function test (input, output, opts, done) {
+  postcss([plugin(opts)])
+    .process(input, {from: undefined})
+    .then((result) => {
+      expect(result.css).to.eql(output);
+      expect(result.warnings()).to.be.empty;
+      done();
+    })
+    .catch((error) => {
+      done(error);
+    })
+}
 
-	it('Image `background-size` -> should be able to get `background-size` properties.', function(done) {
-	vfs.src('./test/src/css/style.css')
-		.pipe(postcss([lazyimagecss({
-			imagePath: ['../img','../slice']
-		})]))
-		.pipe(through2.obj(function(file, enc, cb){
-			content = file.contents.toString();
-			content.match(/background-size/g).length.should.equal(7);
-			cb();
-		}))
-		.on('data', noop)
-		.on('end', done);
-	});
+describe('postcss-wx-px2rpx', () => {
+  it('replace pixel values', (done) => {
+    test(`.title {
+      font-size: 24px;
+      background-image: url(../slice/icon-wh.png);
+      margin: 0 0 0 5px;
+      vertical-align: -1px;
+      display: flex;
+    }`, `.title {
+      font-size: 24rpx;
+      background-image: url(../slice/icon-wh.png);
+      margin: 0 0 0 5rpx;
+      vertical-align: -1rpx;
+      display: flex;
+    }`, {}, done)
+  })
 
-	it('`width` value -> should be able to get correct width value.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../img','../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.indexOf('width: 14px').should.be.above(0);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+  it('rpx not be replaced', (done) => {
+    test(`.title2 {
+      padding: 20rpx 30px 2rem 4em;
+    }`, `.title2 {
+      padding: 20rpx 30rpx 2rem 4em;
+    }`, {}, done)
+  })
 
-	it('`height` value -> should be able to get correct height value.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../img','../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.indexOf('height: 16px').should.be.above(2);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+  it('pixel values not be replaced', (done) => {
+    test(`.title3 {
+      padding: 20rpx 30px 2rem 4em; /* no */
+      margin: 40px;
+      font-size: 24px; /* no */
+    }`, `.title3 {
+      padding: 20rpx 30px 2rem 4em;
+      margin: 40rpx;
+      font-size: 24px;
+    }`, {
+      comment: 'no'
+    }, done)
+  })
 
-	it('`background-size` value -> should be able to get correct height value.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../img','../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.indexOf('background-size: 14px 14px').should.be.above(0);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+  it('replace pixel values with px / opts.divisor', (done) => {
+    test(`.title4 {
+      padding: 30px;
+      margin: 40px;
+    }`, `.title4 {
+      padding: 10rpx;
+      margin: 13.33rpx;
+    }`, {
+      divisor: 3,
+      decimalPlaces: 2
+    }, done)
+  })
 
+  it('replace pixel values with px * opts.multiple', (done) => {
+    test(`.title5 {
+      padding: 30px;
+      margin: 40px;
+    }`, `.title5 {
+      padding: 60rpx;
+      margin: 80rpx;
+    }`, {
+      multiple: 2
+    }, done)
+  })
 
-	it(' Option: imagePath -> should work with another Option of imagePath.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/width/g).length.should.equal(12);
-				content.match(/height/g).length.should.equal(10);
-				content.match(/background-size/g).length.should.equal(7);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+  it('work in media', (done) => {
+    test(`@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      .word {
+        margin-top: 30px;
+        margin-bottom: 40px;
+      }
 
-	it(' Option: width -> should work when disable Option width.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../slice'],
-				width: false
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/width/g).length.should.equal(4);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+      .word-retina {
+        margin-top: 50px;
+        margin-bottom: 60px;
+      }
+    }`, `@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      .word {
+        margin-top: 30rpx;
+        margin-bottom: 40rpx;
+      }
 
-	it(' Option: height -> should work when disable Option height.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../slice'],
-				height: false
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/height/g).length.should.equal(1);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
+      .word-retina {
+        margin-top: 50rpx;
+        margin-bottom: 60rpx;
+      }
+    }`, {}, done)
+  })
 
-	it(' Option: backgroundSize -> should work when disable Option backgroundSize.', function(done) {
-		vfs.src('./test/src/css/style.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../slice'],
-				backgroundSize: false
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/background-size/g).length.should.equal(3);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
-
-	it(' Multi path support -> should work in Multi path.', function(done) {
-		vfs.src('./test/src/css/second/second.css')
-			.pipe(postcss([lazyimagecss({
-				imagePath: ['../../slice']
-			})]))
-			.pipe(through2.obj(function(file, enc, cb){
-				content = file.contents.toString();
-				content.match(/width/g).length.should.equal(2);
-				content.match(/height/g).length.should.equal(2);
-				content.indexOf('width: 100px').should.be.above(0);
-				cb();
-			}))
-			.on('data', noop)
-			.on('end', done);
-	});
-});
-
+  it('work in keyframes', (done) => {
+    test(`@keyframes anim {
+      0% {
+        width: 10px;
+        height: 10px;
+        font-size: 24px;
+      }
+      100% {
+        width: 20px;
+        height: 20px;
+        font-size: 42px;
+      }
+    }`, `@keyframes anim {
+      0% {
+        width: 10rpx;
+        height: 10rpx;
+        font-size: 24rpx;
+      }
+      100% {
+        width: 20rpx;
+        height: 20rpx;
+        font-size: 42rpx;
+      }
+    }`, {}, done)
+  })
+})

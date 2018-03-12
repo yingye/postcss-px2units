@@ -1,6 +1,6 @@
 {
-  "name": "postcss-pxtotarget",
-  "version": "1.0.0",
+  "name": "postcss-wx-pxtorpx",
+  "version": "0.1.0",
   "description": "postcss plugin",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yingye/postcss-pxtotarget.git"
+    "url": "git+https://github.com/yingye/postcss-wx-pxtorpx.git"
   },
   "keywords": [
     "postcss",
@@ -19,19 +19,16 @@
   "author": "yingye",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yingye/postcss-pxtotarget/issues"
+    "url": "https://github.com/yingye/postcss-wx-pxtorpx/issues"
   },
-  "homepage": "https://github.com/yingye/postcss-pxtotarget#readme",
+  "homepage": "https://github.com/yingye/postcss-wx-pxtorpx#readme",
   "dependencies": {
     "object-assign": "^4.1.1",
     "postcss": "^6.0.19"
   },
   "devDependencies": {
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "chai": "^4.1.2",
+    "eslint-config-xo-space": "^0.18.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
     "gulp-mocha": "^5.0.0",

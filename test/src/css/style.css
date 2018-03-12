@@ -25,13 +25,11 @@
 	.word {
 		margin-top: 30px;
 		margin-bottom: 40px;
-		background-image: url(../slice/word.png);
 	}
 
 	.word-retina {
 		margin-top: 50px;
 		margin-bottom: 60px;
-		background-image: url(../slice/word@2x.png);
 	}
 }
 
@@ -42,7 +40,7 @@
 		background-image: url(../slice/keyframe1@2x.png);
 	}
 	100% {
-		font-size: 42px; /*no*/
+		font-size: 42px;
 		background-image: url(../slice/keyframe2@2x.png);
 	}
 }

@@ -7,7 +7,7 @@
   display: flex;
 }
 
-/* 正常情况，含有其他值 */
+/* 正常情况，不转换 */
 .subtitle2 {
   padding: 20rpx 30px 2rem 4em; /* no */
   background-image: url(../slice/icon-wh@2x.png);
