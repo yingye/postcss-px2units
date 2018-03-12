@@ -1,2 +1,2 @@
-# postcss-pxtotarget
+# postcss-wx-pxtorpx
 postcss plugin
