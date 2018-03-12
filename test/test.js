@@ -16,7 +16,7 @@ function test (input, output, opts, done) {
     })
 }
 
-describe('postcss-wx-px2rpx', () => {
+describe('postcss-px2units', () => {
   it('replace pixel values', (done) => {
     test(`.title {
       font-size: 24px;

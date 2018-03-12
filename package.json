@@ -1,5 +1,5 @@
 {
-  "name": "postcss-wx-pxtorpx",
+  "name": "postcss-px2units",
   "version": "0.1.0",
   "description": "postcss plugin",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yingye/postcss-wx-pxtorpx.git"
+    "url": "git+https://github.com/yingye/postcss-px2units.git"
   },
   "keywords": [
     "postcss",
@@ -19,9 +19,9 @@
   "author": "yingye",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yingye/postcss-wx-pxtorpx/issues"
+    "url": "https://github.com/yingye/postcss-px2units/issues"
   },
-  "homepage": "https://github.com/yingye/postcss-wx-pxtorpx#readme",
+  "homepage": "https://github.com/yingye/postcss-px2units#readme",
   "dependencies": {
     "object-assign": "^4.1.1",
     "postcss": "^6.0.19"
