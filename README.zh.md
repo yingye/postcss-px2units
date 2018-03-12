@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/yingye/postcss-wx-pxtorpx.svg?branch=master)](https://travis-ci.org/yingye/postcss-px2units)
 [![change-log](https://img.shields.io/badge/changelog-md-blue.svg)](https://github.com/yingye/postcss-px2units/blob/master/CHANGELOG.md)
 
-A plugin for [PostCSS](https://github.com/ai/postcss) that generates rpx units from pixel units, it also can generate units which you want.
+将 px 单位转换为 rpx 单位，或者其他单位的 [PostCSS](https://github.com/ai/postcss)插件。
 
 # Install
 
@@ -15,7 +15,7 @@ $ npm install postcss-px2units --save-dev
 
 ## Input/Output
 
-With the default settings, we will get this output.
+如果使用 默认的 opts，将会得到如下的输出。
 
 ```css
 /* input */
@@ -73,11 +73,11 @@ Default:
 
 Detail:
 
-- divisor(Number): divisor, replace pixel value with pixel / divisor.
-- multiple(Number): multiple, replace pixel value with pixel * multiple.
-- decimalPlaces(Number): the number of decimal places. For example, the css code is `width: 100px`, we will get the vaule is `Number(100 / divisor * multiple).toFixed(decimalPlaces)`.
-- comment(String): default value is 'no'. For example, if you set it 'not replace', the css code `width: 100px; /* not replace */` will be translated to `width: 100px;`
-- targetUnits(String): The units will replace pixel units, you can set it 'rem'.
+- divisor(Number): 除数，转换后的值 等于 pixel / divisor
+- multiple(Number): 倍数，转换后的值 等于 pixel * multiple
+- decimalPlaces(Number): 小数点后保留的位数，例如, `width: 100px` 中的100，将会被转换成 `Number(100 / divisor * multiple).toFixed(decimalPlaces)`
+- comment(String): 不转换px单位的注释，默认为 `/*no*/`。如果设置 comment 的值为 'not replace', `width: 100px; /* not replace */` 中的100px将不会被转换为 rpx。
+- targetUnits(String): 转换单位，默认值为 rpx，如果设置其值为 'rem'，px将会被转换为rem。
 
 ## Use with gulp-postcss
 
