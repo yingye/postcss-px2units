@@ -3,6 +3,7 @@ English | [简体中文](./README_CN.md)
 # postcss-px2units
 
 [![Build Status](https://travis-ci.org/yingye/postcss-wx-pxtorpx.svg?branch=master)](https://travis-ci.org/yingye/postcss-px2units)
+[![npm version](https://badge.fury.io/js/postcss-px2units.svg)](https://badge.fury.io/js/postcss-px2units)
 [![change-log](https://img.shields.io/badge/changelog-md-blue.svg)](https://github.com/yingye/postcss-px2units/blob/master/CHANGELOG.md)
 
 A plugin for [PostCSS](https://github.com/ai/postcss) that generates rpx units from pixel units, it also can generate units which you want.
