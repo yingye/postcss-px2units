@@ -1,3 +1,5 @@
+[English](./README.md) | 简体中文
+
 # postcss-px2units
 
 [![Build Status](https://travis-ci.org/yingye/postcss-wx-pxtorpx.svg?branch=master)](https://travis-ci.org/yingye/postcss-px2units)
