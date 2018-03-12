@@ -1,0 +1,11 @@
+{
+  "extends": "xo-space",
+  "rules": {
+    "one-var": ["error", { uninitialized: "always", initialized: "never" }],
+    "space-infix-ops": ["error", {"int32Hint": false}]
+  },
+  "env": {
+    "mocha": true,
+    "node": true
+  }
+}
