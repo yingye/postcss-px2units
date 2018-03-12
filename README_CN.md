@@ -8,15 +8,15 @@
 
 将 px 单位转换为 rpx 单位，或者其他单位的 [PostCSS](https://github.com/ai/postcss)插件。
 
-# Install
+## Install
 
 ```
 $ npm install postcss-px2units --save-dev
 ```
 
-# Usage
+## Usage
 
-## Input/Output
+### Input/Output
 
 如果使用 默认的 opts，将会得到如下的输出。
 
@@ -38,7 +38,7 @@ p {
 }
 ```
 
-## Example
+### Example
 
 ```js
 var fs = require('fs');
@@ -58,7 +58,7 @@ fs.writeFile('main-rem.css', processedCss, function (err) {
 });
 ```
 
-## options
+### options
 
 Type: Object | Null
 
@@ -82,7 +82,7 @@ Detail:
 - comment(String): 不转换px单位的注释，默认为 `/*no*/`。如果设置 comment 的值为 'not replace', `width: 100px; /* not replace */` 中的100px将不会被转换为 rpx。
 - targetUnits(String): 转换单位，默认值为 rpx，如果设置其值为 'rem'，px将会被转换为rem。
 
-## Use with gulp-postcss
+### Use with gulp-postcss
 
 ```js
 var gulp = require('gulp');

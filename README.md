@@ -8,15 +8,15 @@ English | [简体中文](./README_CN.md)
 
 A plugin for [PostCSS](https://github.com/ai/postcss) that generates rpx units from pixel units, it also can generate units which you want.
 
-# Install
+## Install
 
 ```
 $ npm install postcss-px2units --save-dev
 ```
 
-# Usage
+## Usage
 
-## Input/Output
+### Input/Output
 
 With the default settings, we will get this output.
 
@@ -38,7 +38,7 @@ p {
 }
 ```
 
-## Example
+### Example
 
 ```js
 var fs = require('fs');
@@ -58,7 +58,7 @@ fs.writeFile('main-rem.css', processedCss, function (err) {
 });
 ```
 
-## options
+### options
 
 Type: Object | Null
 
@@ -82,7 +82,7 @@ Detail:
 - comment(String): default value is 'no'. For example, if you set it 'not replace', the css code `width: 100px; /* not replace */` will be translated to `width: 100px;`
 - targetUnits(String): The units will replace pixel units, you can set it 'rem'.
 
-## Use with gulp-postcss
+### Use with gulp-postcss
 
 ```js
 var gulp = require('gulp');
