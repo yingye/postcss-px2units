@@ -80,6 +80,20 @@ describe('postcss-px2units', () => {
     }, done)
   })
 
+  it('replace pixel values with rem units', (done) => {
+    test(`.title6 {
+      padding: 30px;
+      margin: 40px;
+    }`, `.title6 {
+      padding: 15rem;
+      margin: 20rem;
+    }`, {
+      divisor: 2,
+      decimalPlaces: 2,
+      targetUnits: 'rem'
+    }, done)
+  })
+
   it('work in media', (done) => {
     test(`@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
       .word {
