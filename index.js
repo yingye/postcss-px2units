@@ -7,7 +7,7 @@ module.exports = postcss.plugin('postcss-wx-pxtorpx', function (opts) {
     divisor: 1,
     multiple: 1,
     decimalPlaces: 2,
-    targetTxt: 'rpx',
+    targetUnits: 'rpx',
     comment: 'no'
   }, opts);
 
@@ -17,7 +17,7 @@ module.exports = postcss.plugin('postcss-wx-pxtorpx', function (opts) {
     }
     return str.replace(/([0-9.]+)px/ig, function (match, x) {
       var size = x * opts.multiple / opts.divisor;
-      return size % 1 === 0 ? size + opts.targetTxt : size.toFixed(opts.decimalPlaces) + opts.targetTxt;
+      return size % 1 === 0 ? size + opts.targetUnits : size.toFixed(opts.decimalPlaces) + opts.targetUnits;
     });
   }
 
