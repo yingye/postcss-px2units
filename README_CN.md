@@ -95,3 +95,7 @@ gulp.task('css', function () {
     .pipe(gulp.dest('./test/dist/css'));
 });
 ```
+
+## Tips
+
+如果你想要在 wepy 框架中使用, 请参考 [wepy-plugin-px2units](https://github.com/yingye/wepy-plugin-px2units)
