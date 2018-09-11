@@ -98,4 +98,4 @@ gulp.task('css', function () {
 
 ## Tips
 
-If you want to use it in wepy, please use [wepy-plugin-px2units](https://github.com/yingye/wepy-plugin-px2units).
+If you want to use it in WePY, please use [wepy-plugin-px2units](https://github.com/yingye/wepy-plugin-px2units).
