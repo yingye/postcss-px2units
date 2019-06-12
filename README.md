@@ -27,6 +27,10 @@ p {
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: 1px; /* no */
+  /* postcss-px2units-disable */
+  box-shadow: 4px 4px 2px 2px #777;
+  /* postcss-px2units-enable */
+  padding: 8px;
 }
 
 /* output */
@@ -35,6 +39,8 @@ p {
   font-size: 32rpx;
   line-height: 1.2;
   letter-spacing: 1px;
+  box-shadow: 4px 4px 2px 2px #777;
+  padding: 8rpx;
 }
 ```
 
@@ -70,7 +76,9 @@ Default:
   multiple: 1,
   decimalPlaces: 2,
   comment: 'no',
-  targetUnits: 'rpx'
+  targetUnits: 'rpx',
+  disableAllComment: 'postcss-px2units-disable',
+  enableAllComment: 'postcss-px2units-enable'
 }
 ```
 
@@ -80,6 +88,8 @@ Detail:
 - multiple(Number): multiple, replace pixel value with pixel * multiple.
 - decimalPlaces(Number): the number of decimal places. For example, the css code is `width: 100px`, we will get the vaule is `Number(100 / divisor * multiple).toFixed(decimalPlaces)`.
 - comment(String): default value is 'no'. For example, if you set it 'not replace', the css code `width: 100px; /* not replace */` will be translated to `width: 100px;`
+- disableAllComment(String): comment value for disabling translation of subsequent declarations. Default value is 'postcss-px2units-disable'. If you set it to 'not replace all', `width: 100px; /* not replace all */ height: 50px;` will be translated to `width: 100rpx; height: 50px;`
+- enableAllComment(String): comment value for enabling translation of subsequent declarations. Default value is 'postcss-px2units-enable'. If you set it to 'replace all' and set disableAllComment to 'not replace all', `width: 100px; /* not replace all */ height: 50px; /* replace all */ margin: 10px;` will be translated to `width: 100rpx; height: 50px; margin: 10rpx;`
 - targetUnits(String): The units will replace pixel units, you can set it 'rem'.
 
 ### Use with gulp-postcss

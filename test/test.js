@@ -94,6 +94,27 @@ describe('postcss-px2units', () => {
     }, done)
   })
 
+  it('pixel values not replaced when disabled', (done) => {
+    test(`.title7 {
+      /* postcss-px2units-disable */
+      padding: 20rpx 30px 2rem 4em;
+      margin: 40px;
+      /* other comment is not removed */
+      font-size: 24px;
+      /* postcss-px2units-enable */
+      width: 60px;
+      /* postcss-px2units-disable */
+      height: 30px;
+    }`, `.title7 {
+      padding: 20rpx 30px 2rem 4em;
+      margin: 40px;
+      /* other comment is not removed */
+      font-size: 24px;
+      width: 60rpx;
+      height: 30px;
+    }`, {}, done)
+  })
+
   it('work in media', (done) => {
     test(`@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
       .word {
