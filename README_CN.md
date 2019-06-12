@@ -27,6 +27,10 @@ p {
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: 1px; /* no */
+  /* postcss-px2units-disable */
+  box-shadow: 4px 4px 2px 2px #777;
+  /* postcss-px2units-enable */
+  padding: 8px;
 }
 
 /* output */
@@ -35,6 +39,8 @@ p {
   font-size: 32rpx;
   line-height: 1.2;
   letter-spacing: 1px;
+  box-shadow: 4px 4px 2px 2px #777;
+  padding: 8rpx;
 }
 ```
 
@@ -70,7 +76,9 @@ Default:
   multiple: 1,
   decimalPlaces: 2,
   comment: 'no',
-  targetUnits: 'rpx'
+  targetUnits: 'rpx',
+  disableAllComment: 'postcss-px2units-disable',
+  enableAllComment: 'postcss-px2units-enable'
 }
 ```
 
@@ -80,6 +88,8 @@ Detail:
 - multiple(Number): 倍数，转换后的值 等于 pixel * multiple
 - decimalPlaces(Number): 小数点后保留的位数，例如, `width: 100px` 中的100，将会被转换成 `Number(100 / divisor * multiple).toFixed(decimalPlaces)`
 - comment(String): 不转换px单位的注释，默认为 `/*no*/`。如果设置 comment 的值为 'not replace', `width: 100px; /* not replace */` 中的100px将不会被转换为 rpx。
+- disableAllComment(String): 不转换随后所有px单位的注释，默认为 `/*postcss-px2units-disable*/`。如果设置 disableAllComment 的值为 'not replace all', `width: 100px; /* not replace all */ height: 50px;` 中的50px将不会被转换为 rpx。
+- enableAllComment(String): 转换随后所有px单位的注释，默认为 `/*postcss-px2units-enable*/`。如果设置 enableAllComment 的值为 'replace all' 并设置 disableAllComment 为 'not replace all', `width: 100px; /* not replace all */ height: 50px; /* replace all */ margin: 10px;` 中的100px和10px将会被转换为rpx，50px将不会被转换为 rpx。
 - targetUnits(String): 转换单位，默认值为 rpx，如果设置其值为 'rem'，px将会被转换为rem。
 
 ### Use with gulp-postcss
